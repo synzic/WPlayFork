@@ -7,6 +7,22 @@ from . import regions, rules, locations, items
 from .options import *
 from .items import ITEM_NAME_TO_ID
 from .locations import LOCATION_NAME_TO_ID
+from worlds.LauncherComponents import Component, Type, components, launch, icon_paths
+
+def run_client(*args: str) -> None:
+    from .wii_play_client.main_client import launch_wii_play_client
+    launch(launch_wii_play_client, name="Wii Play Client", args=args)
+
+components.append(
+    Component(
+        "Wii Play Client",
+        script_name="Wii Play Client",
+        func=run_client,
+        game_name="Wii Play",
+        component_type=Type.CLIENT,
+        supports_uri=True,
+    )
+)
 
 class WiiPlayWebWorld(WebWorld):
     game = "Wii Play"
@@ -70,7 +86,7 @@ class WiiPlayWorld(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         slot_data = {
-            "goal_type": self.options.goal_type.value,
+            "goal": self.options.goal_type.value,
             "medal_hunt": self.options.medal_hunt.value,
             "plat_medals": self.options.platinum_medals.value,
             "missionsanity": self.options.missionsanity.value,

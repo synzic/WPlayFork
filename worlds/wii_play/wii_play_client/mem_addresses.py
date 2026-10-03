@@ -6,6 +6,10 @@ class GameState:
                                        #        3=Pose Mii, 4=Laser Hockey, 5=Billiards,
                                        #        6=Fishing, 7=Charge!, 8=Tanks!
 
+    # For both, 0 = Not in state, 1 = In state
+    pause_state = 0x804F0E60 # Word | Also counts menu state as paused
+    menu_state = 0x80B20604 # Word | ONLY Menu state
+
 class HighScores:
     shooting_range = 0x80842b58  # Word
     find_mii       = 0x80842b6c  # Word
